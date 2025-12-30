@@ -56,21 +56,20 @@ export const Navbar = () => {
     >
       <div className="container-main px-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          {/* Logo - Centered */}
+          <Link to="/" className="flex items-center gap-2 group">
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
-              className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-playful"
+              className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-playful"
             >
-              <Star className="w-7 h-7 text-primary-foreground" />
+              <Star className="w-6 h-6 text-primary-foreground" />
             </motion.div>
-            <div className="hidden sm:block">
-              <h1 className="font-display font-bold text-lg text-foreground leading-tight">
-                KB Badan Wakaf UII
-              </h1>
-              <p className="text-xs text-muted-foreground">Kelompok Bermain</p>
-            </div>
+            <h1 className="font-display font-black text-xl">
+              <span className="bg-gradient-to-r from-primary via-pink to-secondary bg-clip-text text-transparent">
+                KB BW UII
+              </span>
+            </h1>
           </Link>
 
           {/* Desktop Navigation */}
@@ -126,15 +125,10 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA & Mobile Menu */}
+          {/* Login & Mobile Menu */}
           <div className="flex items-center gap-3">
-            <Link to="/ppdb" className="hidden md:block">
-              <Button variant="hero" size="sm">
-                Daftar Sekarang
-              </Button>
-            </Link>
             <Link to="/login" className="hidden md:block">
-              <Button variant="ghost" size="sm">
+              <Button variant="outline" size="sm">
                 Login Guru
               </Button>
             </Link>
@@ -180,12 +174,7 @@ export const Navbar = () => {
                     </Link>
                   </motion.div>
                 ))}
-                <div className="pt-4 space-y-2">
-                  <Link to="/ppdb" className="block">
-                    <Button variant="hero" className="w-full">
-                      Daftar Sekarang
-                    </Button>
-                  </Link>
+                <div className="pt-4">
                   <Link to="/login" className="block">
                     <Button variant="outline" className="w-full">
                       Login Guru
