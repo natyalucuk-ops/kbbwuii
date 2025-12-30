@@ -10,6 +10,7 @@ import Program from "./pages/Program";
 import Fasilitas from "./pages/Fasilitas";
 import Galeri from "./pages/Galeri";
 import Pengumuman from "./pages/Pengumuman";
+import PengumumanDetail from "./pages/PengumumanDetail";
 import PPDB from "./pages/PPDB";
 import Kontak from "./pages/Kontak";
 import NotFound from "./pages/NotFound";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/fasilitas" element={<Fasilitas />} />
           <Route path="/galeri" element={<Galeri />} />
           <Route path="/pengumuman" element={<Pengumuman />} />
+          <Route path="/pengumuman/:slug" element={<PengumumanDetail />} />
           <Route path="/ppdb" element={<PPDB />} />
           <Route path="/kontak" element={<Kontak />} />
           <Route path="*" element={<NotFound />} />
