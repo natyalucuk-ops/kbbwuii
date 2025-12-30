@@ -44,14 +44,11 @@ export const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-card/95 backdrop-blur-md shadow-card py-2"
-          : "bg-transparent py-4"
+          : "bg-card/80 backdrop-blur-sm py-4"
       }`}
     >
       <div className="container-main px-4">
@@ -186,7 +183,7 @@ export const Navbar = () => {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
