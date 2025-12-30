@@ -15,7 +15,8 @@ src/
 │   ├── Program.tsx       # Halaman Program
 │   ├── Fasilitas.tsx     # Halaman Fasilitas
 │   ├── Galeri.tsx        # Halaman Galeri
-│   ├── Pengumuman.tsx    # Halaman Pengumuman
+│   ├── Pengumuman.tsx    # Halaman Daftar Pengumuman
+│   ├── PengumumanDetail.tsx # Halaman Detail Pengumuman
 │   ├── PPDB.tsx          # Halaman Pendaftaran
 │   ├── Kontak.tsx        # Halaman Kontak
 │   ├── Login.tsx         # Halaman Login Guru
@@ -89,13 +90,29 @@ Data dinamis disimpan di database:
 | `profiles` | Profil user |
 | `user_roles` | Role admin/guru |
 
-### Menambah Pengumuman
-1. Login sebagai admin
-2. Buka Dashboard → Pengumuman → Tambah Baru
+### Menambah Pengumuman via Database
+1. Buka Lovable Cloud → Database → Tabel `announcements`
+2. Tambahkan baris baru dengan field:
+   - `title`: Judul pengumuman
+   - `slug`: URL-friendly title (contoh: `pengumuman-baru-2024`)
+   - `content`: Isi pengumuman
+   - `is_published`: `true` untuk mempublikasikan
+   - `published_at`: Tanggal publikasi (contoh: `2024-12-30`)
+   - `cover_image_url`: URL gambar cover (opsional)
+
+### Halaman Detail Pengumuman
+Setiap pengumuman memiliki halaman detail sendiri dengan URL: `/pengumuman/{slug}`
+
+Contoh: `/pengumuman/pendaftaran-siswa-baru-2024-2025`
+
+File yang mengatur halaman detail: `src/pages/PengumumanDetail.tsx`
 
 ### Menambah Foto Galeri
-1. Login sebagai admin
-2. Buka Dashboard → Galeri → Upload Foto
+1. Buka Lovable Cloud → Database → Tabel `gallery_items`
+2. Tambahkan baris baru dengan field:
+   - `title`: Judul foto
+   - `image_url`: URL gambar
+   - `category`: Kategori (Kelas, Kegiatan, Outing, dll)
 
 ---
 
