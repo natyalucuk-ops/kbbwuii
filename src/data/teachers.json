@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Ibu Siti Aminah, S.Pd",
+    "role": "Kepala Sekolah",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    "quote": "Setiap anak adalah bintang yang unik dengan cahaya masing-masing."
+  },
+  {
+    "id": "2",
+    "name": "Ibu Dewi Lestari, S.Pd",
+    "role": "Guru Kelas A",
+    "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    "quote": "Bermain adalah cara terbaik anak untuk belajar."
+  },
+  {
+    "id": "3",
+    "name": "Ibu Nur Hidayah, S.Pd",
+    "role": "Guru Kelas B",
+    "image": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop&crop=face",
+    "quote": "Cinta dan kesabaran adalah kunci mendidik anak."
+  },
+  {
+    "id": "4",
+    "name": "Ibu Ratna Sari, S.Psi",
+    "role": "Psikolog Anak",
+    "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    "quote": "Memahami dunia anak adalah langkah pertama mendidik mereka."
+  },
+  {
+    "id": "5",
+    "name": "Bapak Ahmad Fauzan",
+    "role": "Guru Seni & Musik",
+    "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    "quote": "Seni mengajarkan anak untuk berekspresi dengan bebas."
+  },
+  {
+    "id": "6",
+    "name": "Ibu Fatimah Zahra, S.Pd",
+    "role": "Guru Pendamping",
+    "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+    "quote": "Setiap anak layak mendapat perhatian penuh."
+  }
+]

@@ -14,6 +14,13 @@ import PengumumanDetail from "./pages/PengumumanDetail";
 import PPDB from "./pages/PPDB";
 import Kontak from "./pages/Kontak";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPengumuman from "./pages/admin/AdminPengumuman";
+import AdminGaleri from "./pages/admin/AdminGaleri";
+import AdminKegiatan from "./pages/admin/AdminKegiatan";
+import AdminPPDB from "./pages/admin/AdminPPDB";
+import AdminJSON from "./pages/admin/AdminJSON";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +41,17 @@ const App = () => (
           <Route path="/pengumuman/:slug" element={<PengumumanDetail />} />
           <Route path="/ppdb" element={<PPDB />} />
           <Route path="/kontak" element={<Kontak />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="pengumuman" element={<AdminPengumuman />} />
+            <Route path="galeri" element={<AdminGaleri />} />
+            <Route path="kegiatan" element={<AdminKegiatan />} />
+            <Route path="ppdb" element={<AdminPPDB />} />
+            <Route path="json" element={<AdminJSON />} />
+          </Route>
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
