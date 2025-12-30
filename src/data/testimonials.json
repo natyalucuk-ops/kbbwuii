@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Ibu Dewi Rahmawati",
+    "role": "Orang Tua dari Aisyah (5 tahun)",
+    "content": "Anak saya sangat senang bersekolah di KB Badan Wakaf UII. Guru-gurunya ramah dan sabar. Perkembangan Aisyah sangat pesat, terutama dalam hal sosialisasi dan kreativitas.",
+    "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    "id": "2",
+    "name": "Bapak Ahmad Fauzi",
+    "role": "Orang Tua dari Raffi (4 tahun)",
+    "content": "Metode play-based learning yang diterapkan sangat efektif. Raffi jadi lebih mandiri dan percaya diri. Terima kasih KB Badan Wakaf UII!",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    "id": "3",
+    "name": "Ibu Siti Nurhaliza",
+    "role": "Orang Tua dari Zahra (5 tahun)",
+    "content": "Fasilitas lengkap dan lingkungan yang aman membuat kami tenang menitipkan anak. Zahra selalu cerita tentang kegiatan seru di sekolah.",
+    "avatar": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    "id": "4",
+    "name": "Ibu Rina Marlina",
+    "role": "Orang Tua dari Dafa (4 tahun)",
+    "content": "Kurikulum yang diterapkan sangat seimbang antara bermain dan belajar. Dafa tidak pernah bosan ke sekolah!",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+  }
+]

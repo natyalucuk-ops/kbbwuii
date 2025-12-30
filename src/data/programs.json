@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "icon": "Brain",
+    "title": "Stimulasi Kognitif",
+    "description": "Mengembangkan kemampuan berpikir, memecahkan masalah, dan kreativitas anak melalui permainan edukatif.",
+    "color": "primary",
+    "bgColor": "bg-primary/10"
+  },
+  {
+    "id": "2",
+    "icon": "Palette",
+    "title": "Seni & Kreativitas",
+    "description": "Menggambar, mewarnai, dan kerajinan tangan untuk mengasah kreativitas dan imajinasi anak.",
+    "color": "pink",
+    "bgColor": "bg-pink/20"
+  },
+  {
+    "id": "3",
+    "icon": "Music",
+    "title": "Musik & Gerak",
+    "description": "Bernyanyi, menari, dan bermain musik untuk perkembangan motorik dan ekspresi diri.",
+    "color": "accent",
+    "bgColor": "bg-accent/20"
+  },
+  {
+    "id": "4",
+    "icon": "Users",
+    "title": "Keterampilan Sosial",
+    "description": "Belajar bersosialisasi, berbagi, dan bekerja sama dengan teman sebaya.",
+    "color": "secondary",
+    "bgColor": "bg-secondary/20"
+  },
+  {
+    "id": "5",
+    "icon": "BookOpen",
+    "title": "Literasi Awal",
+    "description": "Pengenalan huruf, angka, dan kecintaan pada buku sejak dini.",
+    "color": "mint",
+    "bgColor": "bg-mint/20"
+  }
+]

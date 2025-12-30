@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "badge": "Kelompok Bermain Terbaik di Yogyakarta",
+    "title": "Selamat Datang di",
+    "titleHighlight": "KB Badan Wakaf UII",
+    "subtitle": "Tempat bermain dan belajar yang menyenangkan untuk si kecil. Kami membentuk generasi cerdas, kreatif, dan berakhlak mulia dengan pendekatan play-based learning.",
+    "ctaPrimary": "Daftar Sekarang",
+    "ctaSecondary": "Hubungi Kami"
+  },
+  "stats": [
+    { "value": "15+", "label": "Tahun Pengalaman" },
+    { "value": "200+", "label": "Alumni Berprestasi" },
+    { "value": "8", "label": "Guru Profesional" },
+    { "value": "5", "label": "Program Unggulan" }
+  ],
+  "visiMisi": {
+    "visi": "Menjadi lembaga pendidikan anak usia dini yang unggul dalam membentuk generasi muslim yang cerdas, kreatif, mandiri, dan berakhlak mulia.",
+    "misi": [
+      "Menyelenggarakan pendidikan yang menyenangkan dan bermakna melalui pendekatan bermain sambil belajar",
+      "Mengembangkan potensi anak secara holistik meliputi aspek kognitif, afektif, dan psikomotorik",
+      "Menanamkan nilai-nilai Islam dalam setiap kegiatan pembelajaran",
+      "Membangun kerjasama yang baik dengan orang tua dalam mendukung tumbuh kembang anak",
+      "Menyediakan lingkungan belajar yang aman, nyaman, dan kondusif"
+    ]
+  },
+  "sejarah": {
+    "title": "Sejarah Singkat",
+    "content": "KB Badan Wakaf UII didirikan pada tahun 2008 sebagai wujud kepedulian Badan Wakaf UII terhadap pendidikan anak usia dini. Bermula dari sebuah kelas kecil dengan 15 siswa, kini kami telah berkembang menjadi lembaga PAUD yang dipercaya oleh ratusan keluarga di Yogyakarta.",
+    "milestones": [
+      { "year": "2008", "event": "Pendirian KB Badan Wakaf UII" },
+      { "year": "2012", "event": "Akreditasi A dari BAN PAUD" },
+      { "year": "2015", "event": "Perluasan fasilitas dan gedung baru" },
+      { "year": "2020", "event": "Implementasi kurikulum merdeka belajar" },
+      { "year": "2023", "event": "15 tahun melayani pendidikan anak usia dini" }
+    ]
+  },
+  "ppdb": {
+    "title": "Pendaftaran Peserta Didik Baru",
+    "subtitle": "Tahun Ajaran 2024/2025",
+    "isOpen": true,
+    "requirements": [
+      "Usia 3-6 tahun",
+      "Fotokopi Akta Kelahiran",
+      "Fotokopi Kartu Keluarga",
+      "Pas foto 3x4 (3 lembar)",
+      "Fotokopi KTP Orang Tua"
+    ],
+    "registrationFee": "Rp 500.000",
+    "monthlyFee": "Rp 350.000"
+  }
+}
