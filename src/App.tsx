@@ -20,7 +20,11 @@ import AdminPengumuman from "./pages/admin/AdminPengumuman";
 import AdminGaleri from "./pages/admin/AdminGaleri";
 import AdminKegiatan from "./pages/admin/AdminKegiatan";
 import AdminPPDB from "./pages/admin/AdminPPDB";
-import AdminJSON from "./pages/admin/AdminJSON";
+import AdminGuru from "./pages/admin/AdminGuru";
+import AdminProgram from "./pages/admin/AdminProgram";
+import AdminFasilitas from "./pages/admin/AdminFasilitas";
+import AdminTestimoni from "./pages/admin/AdminTestimoni";
+import AdminSiteConfig from "./pages/admin/AdminSiteConfig";
 
 const queryClient = new QueryClient();
 
@@ -48,8 +52,12 @@ const App = () => (
             <Route path="pengumuman" element={<AdminPengumuman />} />
             <Route path="galeri" element={<AdminGaleri />} />
             <Route path="kegiatan" element={<AdminKegiatan />} />
+            <Route path="guru" element={<AdminGuru />} />
+            <Route path="program" element={<AdminProgram />} />
+            <Route path="fasilitas" element={<AdminFasilitas />} />
+            <Route path="testimoni" element={<AdminTestimoni />} />
+            <Route path="config" element={<AdminSiteConfig />} />
             <Route path="ppdb" element={<AdminPPDB />} />
-            <Route path="json" element={<AdminJSON />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />

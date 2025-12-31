@@ -5,49 +5,37 @@ import {
   Music, 
   Brain, 
   Users, 
-  BookOpen 
+  BookOpen,
+  Heart,
+  Gamepad2,
+  Star
 } from "lucide-react";
 import { FloatingElements } from "@/components/decorations/FloatingElements";
+import { usePrograms } from "@/hooks/useSiteConfig";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const programs = [
-  {
-    icon: Brain,
-    title: "Stimulasi Kognitif",
-    description: "Mengembangkan kemampuan berpikir, memecahkan masalah, dan kreativitas anak.",
-    color: "primary",
-    bgColor: "bg-primary/10",
-  },
-  {
-    icon: Palette,
-    title: "Seni & Kreativitas",
-    description: "Menggambar, mewarnai, dan kerajinan tangan untuk mengasah kreativitas.",
-    color: "pink",
-    bgColor: "bg-pink/20",
-  },
-  {
-    icon: Music,
-    title: "Musik & Gerak",
-    description: "Bernyanyi, menari, dan bermain musik untuk perkembangan motorik.",
-    color: "accent",
-    bgColor: "bg-accent/20",
-  },
-  {
-    icon: Users,
-    title: "Keterampilan Sosial",
-    description: "Belajar bersosialisasi, berbagi, dan bekerja sama dengan teman.",
-    color: "secondary",
-    bgColor: "bg-secondary/20",
-  },
-  {
-    icon: BookOpen,
-    title: "Literasi Awal",
-    description: "Pengenalan huruf, angka, dan kecintaan pada buku sejak dini.",
-    color: "mint",
-    bgColor: "bg-mint/20",
-  },
-];
+const iconMap: { [key: string]: any } = {
+  Palette,
+  Music,
+  Brain,
+  Users,
+  BookOpen,
+  Heart,
+  Gamepad2,
+  Star,
+};
+
+const colorBgMap: { [key: string]: string } = {
+  primary: "bg-primary/10",
+  pink: "bg-pink/20",
+  accent: "bg-accent/20",
+  secondary: "bg-secondary/20",
+  mint: "bg-mint/20",
+};
 
 export const ProgramSection = () => {
+  const { data: programs, loading } = usePrograms();
+
   return (
     <section className="section-padding relative overflow-hidden">
       <FloatingElements variant="section" />
@@ -75,27 +63,43 @@ export const ProgramSection = () => {
 
         {/* Program Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((program, index) => (
-            <motion.div
-              key={program.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, rotate: 1 }}
-              className="card-playful group cursor-pointer"
-            >
-              <div className={`w-16 h-16 ${program.bgColor} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <program.icon className={`w-8 h-8 text-${program.color}`} />
+          {loading ? (
+            Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="card-playful">
+                <Skeleton className="w-16 h-16 rounded-2xl mb-4" />
+                <Skeleton className="w-32 h-6 mb-2" />
+                <Skeleton className="w-full h-4" />
+                <Skeleton className="w-3/4 h-4 mt-1" />
               </div>
-              <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                {program.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {program.description}
-              </p>
-            </motion.div>
-          ))}
+            ))
+          ) : (
+            programs.map((program, index) => {
+              const IconComponent = iconMap[program.icon] || Star;
+              const bgColor = colorBgMap[program.color] || "bg-primary/10";
+              
+              return (
+                <motion.div
+                  key={program.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -8, rotate: 1 }}
+                  className="card-playful group cursor-pointer"
+                >
+                  <div className={`w-16 h-16 ${bgColor} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className={`w-8 h-8 text-${program.color}`} />
+                  </div>
+                  <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {program.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {program.description}
+                  </p>
+                </motion.div>
+              );
+            })
+          )}
         </div>
 
         {/* CTA */}

@@ -32,8 +32,12 @@ const menuItems = [
   { title: "Pengumuman", url: "/admin/pengumuman", icon: Megaphone },
   { title: "Galeri", url: "/admin/galeri", icon: Images },
   { title: "Kegiatan", url: "/admin/kegiatan", icon: Calendar },
+  { title: "Guru", url: "/admin/guru", icon: Users },
+  { title: "Program", url: "/admin/program", icon: FileText },
+  { title: "Fasilitas", url: "/admin/fasilitas", icon: Settings },
+  { title: "Testimoni", url: "/admin/testimoni", icon: Megaphone },
+  { title: "Konfigurasi", url: "/admin/config", icon: Settings },
   { title: "Pendaftar PPDB", url: "/admin/ppdb", icon: Users },
-  { title: "Edit JSON", url: "/admin/json", icon: FileText },
 ];
 
 const AdminLayout = () => {
