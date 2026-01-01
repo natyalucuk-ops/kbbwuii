@@ -45,7 +45,7 @@ const Ticker = () => {
   const duplicatedItems = [...tickerItems, ...tickerItems];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-primary via-secondary to-primary text-primary-foreground py-2 overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-amber-400 via-orange-400 to-pink-400 text-white py-1 overflow-hidden shadow-sm">
       <div className="relative">
         <motion.div
           className="flex whitespace-nowrap"
@@ -56,7 +56,7 @@ const Ticker = () => {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 30,
+              duration: 25,
               ease: "linear",
             },
           }}
@@ -64,12 +64,13 @@ const Ticker = () => {
           {duplicatedItems.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 mx-8"
+              className="flex items-center gap-1.5 mx-6"
             >
-              <item.icon className="w-4 h-4 flex-shrink-0" />
-              <span className="font-display font-semibold text-sm">
+              <item.icon className="w-3 h-3 flex-shrink-0" />
+              <span className="font-medium text-xs">
                 {item.text}
               </span>
+              <span className="mx-4 text-white/50">✦</span>
             </div>
           ))}
         </motion.div>
