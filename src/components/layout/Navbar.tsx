@@ -62,9 +62,10 @@ export const Navbar = () => {
             >
               <Star className="w-6 h-6 text-primary-foreground" />
             </motion.div>
-            <h1 className="font-display font-black text-xl">
-              <span className="bg-gradient-to-r from-primary via-pink to-secondary bg-clip-text text-transparent">
-                KB BW UII
+            <h1 className="font-display font-black text-lg leading-tight">
+              <span className="bg-gradient-to-r from-primary via-pink to-secondary bg-clip-text text-transparent flex flex-col">
+                <span>KB</span>
+                <span className="-mt-1">BW UII</span>
               </span>
             </h1>
           </Link>
