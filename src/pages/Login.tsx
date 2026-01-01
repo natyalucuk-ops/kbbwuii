@@ -53,7 +53,7 @@ const Login = () => {
           title: "Login Berhasil",
           description: "Selamat datang kembali!",
         });
-        navigate("/dashboard");
+        navigate("/admin");
       }
     } catch (error) {
       toast({
