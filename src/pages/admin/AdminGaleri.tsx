@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-
+import ImageUpload from "@/components/ui/ImageUpload";
 interface GalleryItem {
   id: string;
   title: string;
@@ -161,12 +161,11 @@ const AdminGaleri = () => {
               />
             </div>
             <div>
-              <Label>URL Gambar</Label>
-              <Input
+              <Label>Gambar</Label>
+              <ImageUpload
                 value={formData.image_url}
-                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                placeholder="https://..."
-                required
+                onChange={(url) => setFormData({ ...formData, image_url: url })}
+                folder="gallery"
               />
             </div>
             <div>
@@ -185,12 +184,6 @@ const AdminGaleri = () => {
                 </SelectContent>
               </Select>
             </div>
-            {formData.image_url && (
-              <div>
-                <Label>Preview</Label>
-                <img src={formData.image_url} alt="Preview" className="w-full h-40 object-cover rounded-lg mt-2" />
-              </div>
-            )}
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
                 Batal

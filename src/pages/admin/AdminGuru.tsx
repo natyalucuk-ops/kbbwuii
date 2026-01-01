@@ -7,7 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, GripVertical } from "lucide-react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
+import ImageUpload from "@/components/ui/ImageUpload";
 
 interface Teacher {
   id: string;
@@ -185,12 +186,11 @@ const AdminGuru = () => {
               />
             </div>
             <div>
-              <Label>URL Foto</Label>
-              <Input
+              <Label>Foto</Label>
+              <ImageUpload
                 value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                placeholder="https://..."
-                required
+                onChange={(url) => setFormData({ ...formData, image: url })}
+                folder="teachers"
               />
             </div>
             <div>
@@ -202,12 +202,6 @@ const AdminGuru = () => {
                 rows={2}
               />
             </div>
-            {formData.image && (
-              <div>
-                <Label>Preview</Label>
-                <img src={formData.image} alt="Preview" className="w-24 h-24 object-cover rounded-lg mt-2" />
-              </div>
-            )}
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
                 Batal
