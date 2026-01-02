@@ -142,7 +142,7 @@ const Kontak = () => {
               <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden bg-muted">
                 {contact?.googleMapsUrl && (
                   <iframe
-                    src={contact.googleMapsUrl.includes("embed") ? contact.googleMapsUrl : `https://www.google.com/maps/place/Kelompok+Bermain+Badan+Wakaf+UII/@-7.6879929,110.4082801,20.41z/data=!4m6!3m5!1s0x2e7a5e9682932aeb:0x35788d529bc30c71!8m2!3d-7.6879555!4d110.4083883!16s%2Fg%2F11dxpjyg9`}
+                    src={contact.googleMapsUrl.includes("embed") ? contact.googleMapsUrl : `https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d247.12219976165755!2d110.40828136150398!3d-7.687957572283036!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5e9682932aeb%3A0x35788d529bc30c71!2sKelompok%20Bermain%20Badan%20Wakaf%20UII!5e0!3m2!1sid!2sid!4v1767394341914!5m2!1sid!2sid`}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
