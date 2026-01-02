@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Heart } from "lucide-react";
 import { Star, Cloud, Balloon } from "@/components/decorations/FloatingElements";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const footerLinks = {
   menu: [
@@ -18,7 +20,43 @@ const footerLinks = {
   ],
 };
 
+interface ContactData {
+  address: string;
+  phone: string;
+  email: string;
+  operationalHours: string;
+}
+
 export const Footer = () => {
+  const [contact, setContact] = useState<ContactData>({
+    address: "Jl. Kaliurang Km 14.5, Sleman, Yogyakarta 55584",
+    phone: "(0274) 895287",
+    email: "kb@bwuii.or.id",
+    operationalHours: "Sen - Jum: 07.30 - 11.30 WIB",
+  });
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      const { data } = await supabase
+        .from("site_config")
+        .select("value")
+        .eq("key", "contact")
+        .single();
+      
+      if (data?.value) {
+        const val = data.value as unknown as ContactData;
+        setContact({
+          address: val.address || contact.address,
+          phone: val.phone || contact.phone,
+          email: val.email || contact.email,
+          operationalHours: val.operationalHours || contact.operationalHours,
+        });
+      }
+    };
+
+    fetchContact();
+  }, []);
+
   return (
     <footer className="relative bg-gradient-to-b from-secondary/20 to-secondary/40 pt-16 pb-8 overflow-hidden">
       {/* Decorations */}
@@ -112,19 +150,19 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" />
-                <span>Jl. Kaliurang Km 14.5, Sleman, Yogyakarta 55584</span>
+                <span>{contact.address}</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>(0274) 895287</span>
+                <span>{contact.phone}</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>kb@bwuii.or.id</span>
+                <span>{contact.email}</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Sen - Jum: 07.30 - 11.30 WIB</span>
+                <span>{contact.operationalHours}</span>
               </li>
             </ul>
           </div>

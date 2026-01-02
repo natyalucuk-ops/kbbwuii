@@ -1,37 +1,82 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { FloatingElements } from "@/components/decorations/FloatingElements";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, MessageCircle, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, ExternalLink, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Alamat",
-    content: "Jl. Kaliurang Km 14.5, Sleman, Yogyakarta 55584",
-    color: "primary",
-  },
-  {
-    icon: Phone,
-    title: "Telepon",
-    content: "(0274) 895287",
-    color: "secondary",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    content: "kb@bwuii.or.id",
-    color: "accent",
-  },
-  {
-    icon: Clock,
-    title: "Jam Operasional",
-    content: "Senin - Jumat: 07.30 - 11.30 WIB",
-    color: "mint",
-  },
-];
+interface ContactData {
+  address: string;
+  phone: string;
+  whatsapp: string;
+  email: string;
+  operationalHours: string;
+  googleMapsUrl: string;
+}
 
 const Kontak = () => {
+  const [contact, setContact] = useState<ContactData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      const { data } = await supabase
+        .from("site_config")
+        .select("value")
+        .eq("key", "contact")
+        .single();
+      
+      if (data?.value) {
+        setContact(data.value as unknown as ContactData);
+      }
+      setLoading(false);
+    };
+
+    fetchContact();
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      </Layout>
+    );
+  }
+
+  const contactInfo = contact ? [
+    {
+      icon: MapPin,
+      title: "Alamat",
+      content: contact.address,
+      color: "primary",
+    },
+    {
+      icon: Phone,
+      title: "Telepon",
+      content: contact.phone,
+      color: "secondary",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      content: contact.email,
+      color: "accent",
+    },
+    {
+      icon: Clock,
+      title: "Jam Operasional",
+      content: contact.operationalHours,
+      color: "mint",
+    },
+  ] : [];
+
+  const whatsappLink = contact?.whatsapp 
+    ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
+    : "#";
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -95,26 +140,30 @@ const Kontak = () => {
             >
               <h3 className="font-display font-bold text-foreground text-xl mb-4">Lokasi Kami</h3>
               <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden bg-muted">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.0663716974!2d110.41891231477474!3d-7.746481394421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59ce4c9c89ed%3A0x4027a76e352fdc0!2sUniversitas%20Islam%20Indonesia!5e0!3m2!1sid!2sid!4v1640000000000!5m2!1sid!2sid"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0"
-                />
+                {contact?.googleMapsUrl && (
+                  <iframe
+                    src={contact.googleMapsUrl.includes("embed") ? contact.googleMapsUrl : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.0663716974!2d110.41891231477474!3d-7.746481394421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59ce4c9c89ed%3A0x4027a76e352fdc0!2sUniversitas%20Islam%20Indonesia!5e0!3m2!1sid!2sid!4v1640000000000!5m2!1sid!2sid`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                  />
+                )}
               </div>
-              <a
-                href="https://goo.gl/maps/YourLocationLink"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-4 hover:underline"
-              >
-                Buka di Google Maps
-                <ExternalLink className="w-4 h-4" />
-              </a>
+              {contact?.googleMapsUrl && (
+                <a
+                  href={contact.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-4 hover:underline"
+                >
+                  Buka di Google Maps
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
             </motion.div>
 
             {/* WhatsApp CTA */}
@@ -137,7 +186,7 @@ const Kontak = () => {
                 dan informasi lainnya.
               </p>
               <a
-                href="https://wa.me/62274895287?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII"
+                href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
