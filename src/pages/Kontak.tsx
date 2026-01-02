@@ -142,7 +142,7 @@ const Kontak = () => {
               <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden bg-muted">
                 {contact?.googleMapsUrl && (
                   <iframe
-                    src={contact.googleMapsUrl.includes("embed") ? contact.googleMapsUrl : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.0663716974!2d110.41891231477474!3d-7.746481394421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59ce4c9c89ed%3A0x4027a76e352fdc0!2sUniversitas%20Islam%20Indonesia!5e0!3m2!1sid!2sid!4v1640000000000!5m2!1sid!2sid`}
+                    src={contact.googleMapsUrl.includes("embed") ? contact.googleMapsUrl : `https://www.google.com/maps/place/Kelompok+Bermain+Badan+Wakaf+UII/@-7.6879929,110.4082801,20.41z/data=!4m6!3m5!1s0x2e7a5e9682932aeb:0x35788d529bc30c71!8m2!3d-7.6879555!4d110.4083883!16s%2Fg%2F11dxpjyg9`}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
