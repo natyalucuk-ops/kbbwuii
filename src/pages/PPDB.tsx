@@ -8,7 +8,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 import { Send, CheckCircle, Calendar, Users, FileText, Phone } from "lucide-react";
+
+interface PPDBData {
+  title: string;
+  subtitle: string;
+  isOpen: boolean;
+  requirements: string[];
+  registrationFee: string;
+  monthlyFee: string;
+}
+
+interface ContactData {
+  whatsapp: string;
+}
 
 const PPDB = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +36,13 @@ const PPDB = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
+  
+  const { data: ppdbData } = useSiteConfig("ppdb");
+  const { data: contactData } = useSiteConfig("contact");
+  
+  const ppdb = ppdbData as unknown as PPDBData | null;
+  const contact = contactData as unknown as ContactData | null;
+  const whatsappNumber = contact?.whatsapp || "6281215561771";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,10 +106,10 @@ const PPDB = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              PPDB 2024/2025
+              {ppdb?.subtitle || "Tahun Ajaran 2025/2026"}
             </span>
             <h1 className="text-4xl md:text-5xl font-display font-black text-foreground mb-6">
-              Pendaftaran{" "}
+              {ppdb?.title || "Pendaftaran"}{" "}
               <span className="bg-gradient-to-r from-primary via-pink to-secondary bg-clip-text text-transparent">
                 Siswa Baru
               </span>
@@ -140,27 +161,28 @@ const PPDB = () => {
               
               <div className="space-y-6">
                 <div className="card-playful">
-                  <h3 className="font-display font-bold text-foreground mb-2">Persyaratan Usia</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Anak berusia 3-5 tahun pada saat tahun ajaran dimulai
-                  </p>
-                </div>
-
-                <div className="card-playful">
-                  <h3 className="font-display font-bold text-foreground mb-2">Dokumen yang Diperlukan</h3>
+                  <h3 className="font-display font-bold text-foreground mb-2">Persyaratan</h3>
                   <ul className="text-muted-foreground text-sm space-y-1">
-                    <li>• Fotokopi Akta Kelahiran</li>
-                    <li>• Fotokopi Kartu Keluarga</li>
-                    <li>• Pas Foto 3x4 (4 lembar)</li>
-                    <li>• Fotokopi KTP Orang Tua</li>
+                    {ppdb?.requirements?.map((req, index) => (
+                      <li key={index}>• {req}</li>
+                    )) || (
+                      <>
+                        <li>• Usia 3-6 tahun</li>
+                        <li>• Fotokopi Akta Kelahiran</li>
+                        <li>• Fotokopi Kartu Keluarga</li>
+                        <li>• Pas foto 3x4 (3 lembar)</li>
+                        <li>• Fotokopi KTP Orang Tua</li>
+                      </>
+                    )}
                   </ul>
                 </div>
 
                 <div className="card-playful">
                   <h3 className="font-display font-bold text-foreground mb-2">Biaya Pendaftaran</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Informasi biaya akan disampaikan saat kunjungan atau via WhatsApp
-                  </p>
+                  <div className="text-muted-foreground text-sm space-y-1">
+                    <p>• Biaya Daftar: <span className="font-semibold text-foreground">{ppdb?.registrationFee || "Hubungi kami"}</span></p>
+                    <p>• SPP Bulanan: <span className="font-semibold text-foreground">{ppdb?.monthlyFee || "Hubungi kami"}</span></p>
+                  </div>
                 </div>
 
                 <div className="card-playful bg-gradient-primary text-primary-foreground">
@@ -169,7 +191,7 @@ const PPDB = () => {
                     Ada pertanyaan? Hubungi kami via WhatsApp
                   </p>
                   <a
-                    href="https://wa.me/62274895287?text=Halo,%20saya%20ingin%20bertanya%20tentang%20PPDB%20KB%20Badan%20Wakaf%20UII"
+                    href={`https://wa.me/${whatsappNumber}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20PPDB%20KB%20Badan%20Wakaf%20UII`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
