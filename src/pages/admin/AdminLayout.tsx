@@ -21,7 +21,9 @@ import {
   Users, 
   FileText,
   LogOut,
-  Settings
+  Settings,
+  Quote,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -36,6 +38,8 @@ const menuItems = [
   { title: "Program", url: "/admin/program", icon: FileText },
   { title: "Fasilitas", url: "/admin/fasilitas", icon: Settings },
   { title: "Testimoni", url: "/admin/testimoni", icon: Megaphone },
+  { title: "Quotes", url: "/admin/quotes", icon: Quote },
+  { title: "Profil Sekolah", url: "/admin/profil", icon: User },
   { title: "Konfigurasi", url: "/admin/config", icon: Settings },
   { title: "Pendaftar PPDB", url: "/admin/ppdb", icon: Users },
 ];

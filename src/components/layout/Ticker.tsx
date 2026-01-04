@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Clock, Calendar, MapPin, Phone, Sparkles } from "lucide-react";
+import { Clock, Calendar, MapPin, Phone, Sparkles, MessageCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface ContactData {
+  phone?: string;
+  whatsapp?: string;
+  address?: string;
+}
 
 const Ticker = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [contact, setContact] = useState<ContactData | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -11,6 +19,22 @@ const Ticker = () => {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      const { data, error } = await supabase
+        .from("site_config")
+        .select("value")
+        .eq("key", "contact")
+        .maybeSingle();
+
+      if (!error && data?.value) {
+        setContact(data.value as unknown as ContactData);
+      }
+    };
+
+    fetchContact();
   }, []);
 
   const formatTime = (date: Date) => {
@@ -32,12 +56,19 @@ const Ticker = () => {
     });
   };
 
+  const formatWhatsApp = (wa: string) => {
+    if (wa.startsWith("62")) {
+      return `0${wa.slice(2)}`;
+    }
+    return wa;
+  };
+
   const tickerItems = [
     { icon: Clock, text: `Waktu Server: ${formatTime(currentTime)} WIB` },
     { icon: Calendar, text: formatDate(currentTime) },
     { icon: Sparkles, text: "Selamat Datang di KB Badan Wakaf UII!" },
-    { icon: MapPin, text: "Jl. Kaliurang Km 14.5, Yogyakarta" },
-    { icon: Phone, text: "Hubungi Kami: (0274) 895287" },
+    { icon: MapPin, text: contact?.address || "Jl. Kaliurang Km 14.5, Yogyakarta" },
+    { icon: MessageCircle, text: `Hubungi Kami: ${contact?.whatsapp ? formatWhatsApp(contact.whatsapp) : "(0274) 895287"}` },
     { icon: Sparkles, text: "Pendaftaran Siswa Baru Tahun Ajaran 2025/2026 Dibuka!" },
   ];
 
@@ -45,7 +76,7 @@ const Ticker = () => {
   const duplicatedItems = [...tickerItems, ...tickerItems];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-amber-400 via-orange-400 to-pink-400 text-white py-1 overflow-hidden shadow-sm">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-amber-400 via-orange-400 to-pink-400 text-white py-1.5 overflow-hidden shadow-md">
       <div className="relative">
         <motion.div
           className="flex whitespace-nowrap"
@@ -62,16 +93,28 @@ const Ticker = () => {
           }}
         >
           {duplicatedItems.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex items-center gap-1.5 mx-6"
+              className="flex items-center gap-2 mx-6"
+              whileHover={{ scale: 1.05 }}
             >
-              <item.icon className="w-3 h-3 flex-shrink-0" />
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+              >
+                <item.icon className="w-4 h-4 flex-shrink-0" />
+              </motion.div>
               <span className="font-medium text-xs">
                 {item.text}
               </span>
-              <span className="mx-4 text-white/50">✦</span>
-            </div>
+              <motion.span 
+                className="mx-4 text-white/70"
+                animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                transition={{ duration: 3, repeat: Infinity, delay: index * 0.3 }}
+              >
+                ✦
+              </motion.span>
+            </motion.div>
           ))}
         </motion.div>
       </div>

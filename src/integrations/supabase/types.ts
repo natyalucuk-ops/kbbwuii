@@ -245,6 +245,36 @@ export type Database = {
         }
         Relationships: []
       }
+      quotes: {
+        Row: {
+          author: string | null
+          content: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_config: {
         Row: {
           id: string
