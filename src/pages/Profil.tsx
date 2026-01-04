@@ -2,47 +2,56 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { FloatingElements, Star, Heart } from "@/components/decorations/FloatingElements";
 import { Target, Eye, BookOpen, GraduationCap, Award, Users } from "lucide-react";
+import { useSiteConfig, useTeachers } from "@/hooks/useSiteConfig";
+import { Skeleton } from "@/components/ui/skeleton";
+import { icons } from "lucide-react";
 
-const teachers = [
-  {
-    name: "Ustadzah Siti Aminah, S.Pd",
-    role: "Kepala Sekolah",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
-    color: "primary",
-  },
-  {
-    name: "Ustadzah Nur Hidayah, S.Pd",
-    role: "Guru Kelas",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face",
-    color: "secondary",
-  },
-  {
-    name: "Ustadzah Fatimah, S.Pd",
-    role: "Guru Kelas",
-    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=300&h=300&fit=crop&crop=face",
-    color: "pink",
-  },
-  {
-    name: "Ustadzah Khadijah, S.Pd",
-    role: "Guru Seni",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
-    color: "accent",
-  },
-  {
-    name: "Ustadz Ahmad Ridwan, S.Pd",
-    role: "Guru Olahraga",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    color: "mint",
-  },
-  {
-    name: "Ustadzah Maryam, S.Psi",
-    role: "Psikolog Anak",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=300&fit=crop&crop=face",
-    color: "purple",
-  },
-];
+interface ProfileData {
+  schoolName: string;
+  tagline: string;
+  visi: string;
+  misi: string[];
+  sejarah: {
+    title: string;
+    content: string;
+  };
+  statistics: {
+    value: string;
+    label: string;
+    icon: string;
+    color: string;
+  }[];
+}
+
+interface Teacher {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  quote?: string;
+}
+
+const colorClasses: Record<string, string> = {
+  primary: "bg-primary",
+  secondary: "bg-secondary",
+  pink: "bg-pink",
+  accent: "bg-accent",
+  mint: "bg-mint",
+  purple: "bg-purple-500",
+};
 
 const Profil = () => {
+  const { data: profileData, loading: profileLoading } = useSiteConfig("profile");
+  const { data: teachersData, loading: teachersLoading } = useTeachers();
+
+  const profile = profileData as unknown as ProfileData | null;
+  const teachers = teachersData as Teacher[];
+
+  const getIcon = (iconName: string) => {
+    const LucideIcon = (icons as Record<string, any>)[iconName];
+    return LucideIcon || GraduationCap;
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -60,11 +69,19 @@ const Profil = () => {
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-foreground mb-6">
               <span className="bg-gradient-to-r from-primary via-pink to-secondary bg-clip-text text-transparent">
-                KB Badan Wakaf UII
+                {profileLoading ? (
+                  <Skeleton className="w-64 h-12 mx-auto" />
+                ) : (
+                  profile?.schoolName || "KB Badan Wakaf UII"
+                )}
               </span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Membentuk generasi cerdas, kreatif, dan berakhlak mulia sejak dini
+              {profileLoading ? (
+                <Skeleton className="w-80 h-5 mx-auto" />
+              ) : (
+                profile?.tagline || "Membentuk generasi cerdas, kreatif, dan berakhlak mulia sejak dini"
+              )}
             </p>
           </motion.div>
         </div>
@@ -86,11 +103,16 @@ const Profil = () => {
                 <Eye className="w-8 h-8 text-primary" />
               </div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-4">Visi</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Menjadi lembaga pendidikan anak usia dini terdepan yang menghasilkan 
-                generasi Qur'ani yang cerdas, kreatif, mandiri, dan berakhlak mulia 
-                berdasarkan nilai-nilai Islam.
-              </p>
+              {profileLoading ? (
+                <div className="space-y-2">
+                  <Skeleton className="w-full h-4" />
+                  <Skeleton className="w-3/4 h-4" />
+                </div>
+              ) : (
+                <p className="text-muted-foreground leading-relaxed">
+                  {profile?.visi || "Menjadi lembaga pendidikan anak usia dini terdepan yang menghasilkan generasi Qur'ani yang cerdas, kreatif, mandiri, dan berakhlak mulia berdasarkan nilai-nilai Islam."}
+                </p>
+              )}
             </motion.div>
 
             {/* Misi */}
@@ -105,24 +127,27 @@ const Profil = () => {
                 <Target className="w-8 h-8 text-secondary" />
               </div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-4">Misi</h2>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <Star className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span>Menyelenggarakan pembelajaran berbasis Al-Quran dan Sunnah</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Star className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span>Mengembangkan potensi anak melalui pendekatan bermain sambil belajar</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Star className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span>Membangun karakter mandiri, kreatif, dan cinta lingkungan</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Star className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span>Menjalin kemitraan dengan orang tua dalam mendidik anak</span>
-                </li>
-              </ul>
+              {profileLoading ? (
+                <div className="space-y-2">
+                  <Skeleton className="w-full h-4" />
+                  <Skeleton className="w-full h-4" />
+                  <Skeleton className="w-3/4 h-4" />
+                </div>
+              ) : (
+                <ul className="space-y-3 text-muted-foreground">
+                  {(profile?.misi || [
+                    "Menyelenggarakan pembelajaran berbasis Al-Quran dan Sunnah",
+                    "Mengembangkan potensi anak melalui pendekatan bermain sambil belajar",
+                    "Membangun karakter mandiri, kreatif, dan cinta lingkungan",
+                    "Menjalin kemitraan dengan orang tua dalam mendidik anak"
+                  ]).map((item, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <Star className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </motion.div>
           </div>
         </div>
@@ -158,33 +183,57 @@ const Profil = () => {
                 <BookOpen className="w-8 h-8 text-mint" />
               </div>
               <div>
-                <h3 className="text-xl font-display font-bold text-foreground mb-2">
-                  Didirikan Tahun 2008
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  KB Badan Wakaf UII didirikan pada tahun 2008 di bawah naungan Badan Wakaf 
-                  Universitas Islam Indonesia. Bermula dari keinginan untuk memberikan 
-                  pendidikan berkualitas bagi anak usia dini dengan landasan nilai-nilai Islam.
-                </p>
+                {profileLoading ? (
+                  <div className="space-y-2">
+                    <Skeleton className="w-48 h-6" />
+                    <Skeleton className="w-full h-4" />
+                    <Skeleton className="w-3/4 h-4" />
+                  </div>
+                ) : (
+                  <>
+                    <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                      {profile?.sejarah?.title || "Didirikan Tahun 2008"}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {profile?.sejarah?.content || "KB Badan Wakaf UII didirikan pada tahun 2008 di bawah naungan Badan Wakaf Universitas Islam Indonesia. Bermula dari keinginan untuk memberikan pendidikan berkualitas bagi anak usia dini dengan landasan nilai-nilai Islam."}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <div className="text-center p-4 bg-primary/5 rounded-2xl">
-                <GraduationCap className="w-10 h-10 text-primary mx-auto mb-2" />
-                <div className="text-3xl font-display font-black text-primary">200+</div>
-                <p className="text-sm text-muted-foreground">Alumni</p>
-              </div>
-              <div className="text-center p-4 bg-secondary/10 rounded-2xl">
-                <Award className="w-10 h-10 text-secondary mx-auto mb-2" />
-                <div className="text-3xl font-display font-black text-secondary">15+</div>
-                <p className="text-sm text-muted-foreground">Tahun Pengalaman</p>
-              </div>
-              <div className="text-center p-4 bg-accent/20 rounded-2xl">
-                <Users className="w-10 h-10 text-accent mx-auto mb-2" />
-                <div className="text-3xl font-display font-black text-accent">8</div>
-                <p className="text-sm text-muted-foreground">Tenaga Pendidik</p>
-              </div>
+              {profileLoading ? (
+                Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="text-center p-4 bg-muted/50 rounded-2xl">
+                    <Skeleton className="w-10 h-10 mx-auto mb-2 rounded-full" />
+                    <Skeleton className="w-16 h-8 mx-auto mb-1" />
+                    <Skeleton className="w-20 h-3 mx-auto" />
+                  </div>
+                ))
+              ) : (
+                (profile?.statistics || [
+                  { value: "200+", label: "Alumni", icon: "GraduationCap", color: "primary" },
+                  { value: "15+", label: "Tahun Pengalaman", icon: "Award", color: "secondary" },
+                  { value: "8", label: "Tenaga Pendidik", icon: "Users", color: "accent" },
+                ]).map((stat, index) => {
+                  const IconComponent = getIcon(stat.icon);
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`text-center p-4 bg-${stat.color}/10 rounded-2xl`}
+                    >
+                      <IconComponent className={`w-10 h-10 text-${stat.color} mx-auto mb-2`} />
+                      <div className={`text-3xl font-display font-black text-${stat.color}`}>{stat.value}</div>
+                      <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    </motion.div>
+                  );
+                })
+              )}
             </div>
           </motion.div>
         </div>
@@ -212,36 +261,50 @@ const Profil = () => {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {teachers.map((teacher, index) => (
-              <motion.div
-                key={teacher.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8, rotate: 1 }}
-                className="card-playful text-center group"
-              >
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <img
-                    src={teacher.image}
-                    alt={teacher.name}
-                    className="w-full h-full object-cover rounded-full shadow-soft group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className={`absolute -bottom-1 -right-1 w-8 h-8 bg-${teacher.color} rounded-full flex items-center justify-center shadow-soft`}
-                  >
-                    <Heart className="w-4 h-4 text-white fill-white" />
-                  </motion.div>
+            {teachersLoading ? (
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="card-playful text-center">
+                  <Skeleton className="w-24 h-24 rounded-full mx-auto mb-4" />
+                  <Skeleton className="w-32 h-4 mx-auto mb-2" />
+                  <Skeleton className="w-20 h-3 mx-auto" />
                 </div>
-                <h3 className="font-display font-bold text-foreground text-sm md:text-base group-hover:text-primary transition-colors">
-                  {teacher.name}
-                </h3>
-                <p className="text-muted-foreground text-xs md:text-sm">{teacher.role}</p>
-              </motion.div>
-            ))}
+              ))
+            ) : (
+              teachers.map((teacher, index) => {
+                const colors = ["primary", "secondary", "pink", "accent", "mint", "purple"];
+                const color = colors[index % colors.length];
+                return (
+                  <motion.div
+                    key={teacher.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -8, rotate: 1 }}
+                    className="card-playful text-center group"
+                  >
+                    <div className="relative w-24 h-24 mx-auto mb-4">
+                      <img
+                        src={teacher.image}
+                        alt={teacher.name}
+                        className="w-full h-full object-cover rounded-full shadow-soft group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className={`absolute -bottom-1 -right-1 w-8 h-8 ${colorClasses[color] || "bg-primary"} rounded-full flex items-center justify-center shadow-soft`}
+                      >
+                        <Heart className="w-4 h-4 text-white fill-white" />
+                      </motion.div>
+                    </div>
+                    <h3 className="font-display font-bold text-foreground text-sm md:text-base group-hover:text-primary transition-colors">
+                      {teacher.name}
+                    </h3>
+                    <p className="text-muted-foreground text-xs md:text-sm">{teacher.role}</p>
+                  </motion.div>
+                );
+              })
+            )}
           </div>
         </div>
       </section>

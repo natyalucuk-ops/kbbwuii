@@ -179,9 +179,8 @@ const PPDB = () => {
 
                 <div className="card-playful">
                   <h3 className="font-display font-bold text-foreground mb-2">Biaya Pendaftaran</h3>
-                  <div className="text-muted-foreground text-sm space-y-1">
-                    <p>• Biaya Daftar: <span className="font-semibold text-foreground">{ppdb?.registrationFee || "Hubungi kami"}</span></p>
-                    <p>• SPP Bulanan: <span className="font-semibold text-foreground">{ppdb?.monthlyFee || "Hubungi kami"}</span></p>
+                  <div className="text-muted-foreground text-sm">
+                    <p className="text-foreground font-semibold">Hubungi kami untuk informasi lebih lanjut.</p>
                   </div>
                 </div>
 

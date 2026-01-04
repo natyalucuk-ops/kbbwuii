@@ -25,6 +25,8 @@ import AdminProgram from "./pages/admin/AdminProgram";
 import AdminFasilitas from "./pages/admin/AdminFasilitas";
 import AdminTestimoni from "./pages/admin/AdminTestimoni";
 import AdminSiteConfig from "./pages/admin/AdminSiteConfig";
+import AdminQuotes from "./pages/admin/AdminQuotes";
+import AdminProfil from "./pages/admin/AdminProfil";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,8 @@ const App = () => (
             <Route path="fasilitas" element={<AdminFasilitas />} />
             <Route path="testimoni" element={<AdminTestimoni />} />
             <Route path="config" element={<AdminSiteConfig />} />
+            <Route path="quotes" element={<AdminQuotes />} />
+            <Route path="profil" element={<AdminProfil />} />
             <Route path="ppdb" element={<AdminPPDB />} />
           </Route>
           
