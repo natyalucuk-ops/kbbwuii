@@ -201,7 +201,7 @@ const Kontak = () => {
                   Mulai Chat WhatsApp Kepada Kepala Sekolah
                 </Button>
               </a>
-              <br>
+              <br />
               <a
                 href={whatsappLink2}
                 target="_blank"
