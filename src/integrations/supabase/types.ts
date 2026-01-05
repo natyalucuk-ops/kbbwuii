@@ -129,6 +129,7 @@ export type Database = {
           created_by: string | null
           id: string
           image_url: string
+          media_type: string | null
           title: string
         }
         Insert: {
@@ -137,6 +138,7 @@ export type Database = {
           created_by?: string | null
           id?: string
           image_url: string
+          media_type?: string | null
           title: string
         }
         Update: {
@@ -145,6 +147,7 @@ export type Database = {
           created_by?: string | null
           id?: string
           image_url?: string
+          media_type?: string | null
           title?: string
         }
         Relationships: []
