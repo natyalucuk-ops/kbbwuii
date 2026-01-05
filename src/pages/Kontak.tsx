@@ -8,8 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface ContactData {
   address: string;
+  phone: string;
   whatsapp: string;
-  whatsapp2: string;
   email: string;
   operationalHours: string;
   googleMapsUrl: string;
@@ -56,7 +56,7 @@ const Kontak = () => {
     {
       icon: Phone,
       title: "WhatsApp",
-      content: contact.whatsapp,
+      content: `Kepala Sekolah:\n${contact.whatsapp}\nPusat Informasi:\n${contact.phone}`,
       color: "secondary",
     },
     {
@@ -77,7 +77,7 @@ const Kontak = () => {
     ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
     : "#";
   const whatsappLink2 = contact?.whatsapp 
-    ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
+    ? `https://wa.me/${contact.phone}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
     : "#";
 
   return (
@@ -198,11 +198,12 @@ const Kontak = () => {
                   className="bg-white text-primary hover:bg-white/90 shadow-float"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Mulai Chat WhatsApp
+                  Mulai Chat WhatsApp Kepada Kepala Sekolah
                 </Button>
               </a>
+              <br>
               <a
-                href={whatsappLink}
+                href={whatsappLink2}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -211,7 +212,7 @@ const Kontak = () => {
                   className="bg-white text-primary hover:bg-white/90 shadow-float"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Mulai Chat WhatsApp
+                  Mulai Chat WhatsApp Kepada Pusat Informasi
                 </Button>
               </a>
             </motion.div>
