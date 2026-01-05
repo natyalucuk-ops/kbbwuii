@@ -77,7 +77,7 @@ const Kontak = () => {
     ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
     : "#";
   const whatsappLink2 = contact?.phone
-    ? `https://wa.me/${contact.phone}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
+    ? `https://wa.me/${contact.phone.replace(/\D/g, "")}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
     : "#";
 
   return (
