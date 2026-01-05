@@ -198,6 +198,19 @@ const Kontak = () => {
                   Mulai Chat WhatsApp
                 </Button>
               </a>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button 
+                  size="xl" 
+                  className="bg-white text-primary hover:bg-white/90 shadow-float"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Mulai Chat WhatsApp
+                </Button>
+              </a>
             </motion.div>
           </div>
         </div>
