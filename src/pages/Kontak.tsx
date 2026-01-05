@@ -8,8 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface ContactData {
   address: string;
-  phone: string;
   whatsapp: string;
+  whatsapp2: string;
   email: string;
   operationalHours: string;
   googleMapsUrl: string;
@@ -54,9 +54,9 @@ const Kontak = () => {
       color: "primary",
     },
     {
-      icon: Phone,
-      title: "Telepon",
-      content: contact.phone,
+      icon: WhatsApp,
+      title: "WhatsApp",
+      content: contact.whatsapp,
       color: "secondary",
     },
     {
@@ -74,6 +74,9 @@ const Kontak = () => {
   ] : [];
 
   const whatsappLink = contact?.whatsapp 
+    ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
+    : "#";
+  const whatsappLink2 = contact?.whatsapp 
     ? `https://wa.me/${contact.whatsapp}?text=Halo,%20saya%20ingin%20bertanya%20tentang%20KB%20Badan%20Wakaf%20UII`
     : "#";
 
