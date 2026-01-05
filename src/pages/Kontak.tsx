@@ -56,7 +56,7 @@ const Kontak = () => {
     {
       icon: Phone,
       title: "WhatsApp",
-      content: `Kepala Sekolah:\n${contact.whatsapp}\nPusat Informasi:\n${contact.phone}`,
+      content: `Kepala Sekolah:\n${contact.whatsapp}\n\nPusat Informasi:\n${contact.phone}`,
       color: "secondary",
     },
     {
@@ -198,7 +198,7 @@ const Kontak = () => {
                   className="bg-white text-primary hover:bg-white/90 shadow-float"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Mulai Chat WhatsApp Kepada Kepala Sekolah
+                  Mulai Chat WhatsApp ( Kepala Sekolah )
                 </Button>
               </a>
               <br />
@@ -212,7 +212,7 @@ const Kontak = () => {
                   className="bg-white text-primary hover:bg-white/90 shadow-float"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Mulai Chat WhatsApp Kepada Pusat Informasi
+                  Mulai Chat WhatsApp ( Pusat Informasi )
                 </Button>
               </a>
             </motion.div>
