@@ -63,6 +63,11 @@ export const Heart = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+// New particle component
+export const Particle = ({ className = "" }: { className?: string }) => (
+  <div className={`rounded-full ${className}`} />
+);
+
 interface FloatingElementsProps {
   variant?: "hero" | "section" | "minimal";
 }
@@ -99,106 +104,204 @@ export const FloatingElements = ({ variant = "hero" }: FloatingElementsProps) =>
         >
           <Star className="w-8 h-8 text-accent/50" />
         </motion.div>
+        {/* Floating particles */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`particle-section-${i}`}
+            initial={{ opacity: 0.3 }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 4 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+            className={`absolute w-2 h-2 rounded-full bg-primary/30`}
+            style={{
+              left: `${15 + i * 18}%`,
+              top: `${30 + (i % 3) * 20}%`,
+            }}
+          />
+        ))}
       </div>
     );
   }
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Clouds */}
+      {/* Clouds with parallax effect */}
       <motion.div
-        animate={{ x: [0, 30, 0], y: [-10, 10, -10] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ x: [0, 50, 0], y: [-10, 10, -10] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[10%] left-[5%]"
       >
         <Cloud className="w-32 h-20 text-white/80" />
       </motion.div>
       <motion.div
-        animate={{ x: [0, -20, 0], y: [5, -15, 5] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        animate={{ x: [0, -40, 0], y: [5, -15, 5] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="absolute top-[15%] right-[10%]"
       >
         <Cloud className="w-40 h-24 text-white/70" />
       </motion.div>
       <motion.div
-        animate={{ x: [10, -10, 10] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        animate={{ x: [20, -20, 20] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute top-[25%] left-[60%]"
       >
         <Cloud className="w-24 h-16 text-white/60" />
       </motion.div>
 
-      {/* Stars */}
+      {/* Stars with sparkle effect */}
       <motion.div
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 15, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ 
+          scale: [1, 1.3, 1], 
+          rotate: [0, 180, 360],
+          opacity: [0.8, 1, 0.8]
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[20%] left-[20%]"
       >
-        <Star className="w-8 h-8 text-accent" />
+        <Star className="w-8 h-8 text-accent drop-shadow-lg" />
       </motion.div>
       <motion.div
-        animate={{ scale: [1.1, 0.9, 1.1], rotate: [10, -10, 10] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        animate={{ 
+          scale: [1.1, 0.9, 1.1], 
+          rotate: [10, -10, 10],
+          opacity: [0.7, 1, 0.7]
+        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute top-[35%] right-[25%]"
       >
-        <Star className="w-6 h-6 text-pink" />
+        <Star className="w-6 h-6 text-pink drop-shadow-lg" />
       </motion.div>
       <motion.div
-        animate={{ scale: [0.9, 1.1, 0.9] }}
+        animate={{ scale: [0.9, 1.2, 0.9] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         className="absolute bottom-[30%] left-[15%]"
       >
-        <Star className="w-10 h-10 text-secondary" />
+        <Star className="w-10 h-10 text-secondary drop-shadow-lg" />
       </motion.div>
 
-      {/* Balloons */}
+      {/* Balloons with more dynamic movement */}
       <motion.div
-        animate={{ y: [-20, 20, -20], x: [5, -5, 5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ 
+          y: [-20, 30, -20], 
+          x: [5, -10, 5],
+          rotate: [-5, 5, -5]
+        }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[40%] left-[8%]"
       >
-        <Balloon className="w-12 h-18 text-primary" />
+        <Balloon className="w-12 h-18 text-primary drop-shadow-md" />
       </motion.div>
       <motion.div
-        animate={{ y: [15, -25, 15], x: [-3, 3, -3] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        animate={{ 
+          y: [15, -35, 15], 
+          x: [-3, 8, -3],
+          rotate: [3, -3, 3]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="absolute top-[30%] right-[8%]"
       >
-        <Balloon className="w-10 h-15 text-mint" />
+        <Balloon className="w-10 h-15 text-mint drop-shadow-md" />
       </motion.div>
       <motion.div
-        animate={{ y: [-15, 15, -15] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        animate={{ y: [-15, 25, -15], rotate: [-3, 3, -3] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute bottom-[40%] right-[15%]"
       >
-        <Balloon className="w-8 h-12 text-pink" />
+        <Balloon className="w-8 h-12 text-pink drop-shadow-md" />
       </motion.div>
 
       {/* Rainbow - positioned subtly */}
       <motion.div
         initial={{ opacity: 0.3 }}
-        animate={{ opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -bottom-10 left-1/2 -translate-x-1/2"
       >
         <Rainbow className="w-[500px] h-60" />
       </motion.div>
 
-      {/* Hearts */}
+      {/* Hearts with pulse effect */}
       <motion.div
-        animate={{ scale: [1, 1.3, 1], y: [-5, 5, -5] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ 
+          scale: [1, 1.4, 1], 
+          y: [-5, 10, -5],
+          opacity: [0.7, 1, 0.7]
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[50%] left-[3%]"
       >
-        <Heart className="w-6 h-6 text-pink/70" />
+        <Heart className="w-6 h-6 text-pink/80 drop-shadow-sm" />
       </motion.div>
       <motion.div
-        animate={{ scale: [1.2, 1, 1.2] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        animate={{ scale: [1.2, 1, 1.2], rotate: [0, 10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         className="absolute top-[60%] right-[5%]"
       >
-        <Heart className="w-5 h-5 text-primary/60" />
+        <Heart className="w-5 h-5 text-primary/70 drop-shadow-sm" />
       </motion.div>
+
+      {/* Floating particles with reveal animation */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={`particle-hero-${i}`}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{
+            y: [0, -50 - (i % 3) * 20, 0],
+            x: [0, (i % 2 === 0 ? 15 : -15), 0],
+            opacity: [0.2, 0.6, 0.2],
+            scale: [0.8, 1.2, 0.8],
+          }}
+          transition={{
+            duration: 5 + (i % 4),
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.3,
+          }}
+          className={`absolute rounded-full ${
+            i % 4 === 0 
+              ? 'w-3 h-3 bg-primary/40' 
+              : i % 4 === 1 
+              ? 'w-2 h-2 bg-pink/50' 
+              : i % 4 === 2 
+              ? 'w-4 h-4 bg-accent/30' 
+              : 'w-2 h-2 bg-secondary/40'
+          }`}
+          style={{
+            left: `${5 + i * 8}%`,
+            top: `${20 + (i % 5) * 15}%`,
+          }}
+        />
+      ))}
+
+      {/* Sparkle dots */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={`sparkle-${i}`}
+          animate={{
+            opacity: [0, 1, 0],
+            scale: [0.5, 1, 0.5],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.4,
+          }}
+          className="absolute w-1 h-1 bg-white rounded-full shadow-lg"
+          style={{
+            left: `${10 + i * 12}%`,
+            top: `${15 + (i % 4) * 20}%`,
+            boxShadow: '0 0 6px 2px rgba(255,255,255,0.8)',
+          }}
+        />
+      ))}
     </div>
   );
 };

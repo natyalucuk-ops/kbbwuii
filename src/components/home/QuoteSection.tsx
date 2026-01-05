@@ -66,7 +66,7 @@ export const QuoteSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, type: "spring" }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full mb-6 shadow-lg"
+              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent via-pink to-secondary rounded-full mb-6 shadow-lg shadow-accent/30"
             >
               <Quote className="w-8 h-8 text-white" />
             </motion.div>
