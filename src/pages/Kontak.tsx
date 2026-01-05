@@ -56,7 +56,7 @@ const Kontak = () => {
     {
       icon: Phone,
       title: "WhatsApp",
-      content: `Kepala Sekolah:\n${contact.whatsapp}\n \nPusat Informasi:\n${contact.phone}`,
+      content: `Kepala Sekolah:\n${contact.whatsapp}\nPusat Informasi:\n${contact.phone}`,
       color: "secondary",
     },
     {
