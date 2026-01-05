@@ -54,7 +54,7 @@ const Kontak = () => {
       color: "primary",
     },
     {
-      icon: WhatsApp,
+      icon: Phone,
       title: "WhatsApp",
       content: contact.whatsapp,
       color: "secondary",
